@@ -1,0 +1,6 @@
+facebook-messenger:
+  page-access-token: <page-access-token>
+  verify-token: <verify-token>
+
+imgur:
+  client-id: <client-id>
