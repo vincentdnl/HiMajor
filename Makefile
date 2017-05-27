@@ -1,5 +1,8 @@
 run:
-	./venv/bin/gunicorn app:app -k aiohttp.worker.GunicornWebWorker -b localhost:8081 --reload
+	venv/bin/gunicorn app:app -k aiohttp.worker.GunicornWebWorker -b localhost:8081 --reload
+
+menu:
+	venv/bin/python make_menu.py
 
 create_virtualenv:
 	rm -rf venv
@@ -10,10 +13,10 @@ clean_logs:
 	mkdir logs
 
 virtualenv: create_virtualenv
-	./venv/bin/pip install -r requirements.txt
+	venv/bin/pip install -r requirements.txt
 
 requirements:
-	./venv/bin/pip freeze > requirements.txt
+	venv/bin/pip freeze > requirements.txt
 
 tests:
 	venv/bin/pytest --ignore venv

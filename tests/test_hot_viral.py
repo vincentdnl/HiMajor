@@ -40,12 +40,8 @@ async def test_hot_viral(cli: aiohttp.test_utils.TestClient):
                         "recipient": {
                             "id": "123456789101112"
                         },
-                        "message": {
-                            "mid": "mid.1234567891011:1234567890abcdef11",
-                            "text": "hello, world!",
-                            "quick_reply": {
-                                "payload": "DEVELOPER_DEFINED_PAYLOAD"
-                            }
+                        "postback": {
+                            "payload": "HOT_VIRAL"
                         }
                     }
                 ]

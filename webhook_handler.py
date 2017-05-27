@@ -1,4 +1,3 @@
-import json
 from aiohttp.web_request import Request
 
 
@@ -41,6 +40,9 @@ async def handle_one_messaging(one_messaging):
     if 'message' in one_messaging:
         return await handle_messaging_message(one_messaging, page_id, user_id)
 
+    if 'postback' in one_messaging:
+        return await handle_messaging_postback(one_messaging, page_id, user_id)
+
 
 async def handle_messaging_message(one_messaging, page_id, user_id):
     user_text = one_messaging['message'].get('text')
@@ -50,3 +52,11 @@ async def handle_messaging_message(one_messaging, page_id, user_id):
     is_echo = one_messaging['message'].get('is_echo')
     if not is_echo:
         return page_id, user_id, user_text
+
+
+async def handle_messaging_postback(one_messaging, page_id, user_id):
+    user_postback = one_messaging['postback'].get('payload')
+    if not user_postback:
+        return
+
+    return page_id, user_id, user_postback

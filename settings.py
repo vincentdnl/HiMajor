@@ -1,5 +1,6 @@
 import logging.handlers
 
+
 """
 Facebook Messenger API settings
 """
@@ -9,6 +10,10 @@ VERSION = 'v2.6'
 
 def get_me_message_url(access_token):
     return f"{GRAPH_BASE_URL}/{VERSION}/me/messages?access_token={access_token}"
+
+
+def get_me_messenger_profile_url(access_token):
+    return f"{GRAPH_BASE_URL}/{VERSION}/me/messenger_profile?access_token={access_token}"
 
 
 """

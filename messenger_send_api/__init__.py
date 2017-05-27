@@ -1,3 +1,13 @@
+async def get_text_message(user_id, text):
+    return {
+        "recipient": {
+            "id": user_id
+        },
+        "message": {
+            "text": text
+        }
+    }
+
 async def get_generic_template(user_id, elements):
     return {
         "recipient": {
