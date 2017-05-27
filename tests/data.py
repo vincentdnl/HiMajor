@@ -3313,7 +3313,7 @@ facebook_data_example = {
                 "template_type": "generic",
                 "elements": [
                     {
-                        "title": "The victims of the Manchester bombing\\u00a0",
+                        "title": "The victims of the Manchester bombing\u00a0",
                         "image_url": "https://i.imgur.com/JsyU8QL.jpg",
                         "default_action": {
                             "type": "web_url",
