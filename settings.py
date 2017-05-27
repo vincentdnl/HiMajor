@@ -1,7 +1,7 @@
 import logging.handlers
 
 """
-Facebook Messenger API configurations
+Facebook Messenger API settings
 """
 GRAPH_BASE_URL = 'https://graph.facebook.com'
 VERSION = 'v2.6'
@@ -12,7 +12,14 @@ def get_me_message_url(access_token):
 
 
 """
-Logger configurations
+Imgur API settings
+"""
+async def get_imgur_hot_viral_url():
+    return "https://api.imgur.com/3/gallery/hot/viral/0.json"
+
+
+"""
+Logger settings
 """
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
