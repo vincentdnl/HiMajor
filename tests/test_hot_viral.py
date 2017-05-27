@@ -3,21 +3,21 @@ import unittest.mock
 import aiohttp.client
 import settings
 import conftest
-from tests.data import imgur_api_response_example
-from tests.data import facebook_data_example
+import tests.data
 import asynctest
 import json
 
 
 def mocked_get_requests(*args, **kwargs):
-    class MockResponse:
+    class ClientResponseMock:
         def __init__(self, status_code):
             self.status = status_code
 
-        async def json(self):
-            return imgur_api_response_example
+        @staticmethod
+        async def json():
+            return tests.data.imgur_api_response_example
 
-    return MockResponse(200)
+    return ClientResponseMock(200)
 
 
 async def test_hot_viral(cli: aiohttp.test_utils.TestClient):
@@ -68,7 +68,7 @@ async def test_hot_viral(cli: aiohttp.test_utils.TestClient):
     facebook_call = unittest.mock.call(
         settings.get_me_message_url(conftest.PAGE_ACCESS_TOKEN),
         headers={'Content-Type': 'application/json'},
-        data=json.dumps(facebook_data_example)
+        data=json.dumps(tests.data.facebook_data_example)
     )
 
     mocked_post.assert_has_calls(
