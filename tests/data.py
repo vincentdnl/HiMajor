@@ -3314,7 +3314,7 @@ facebook_data_example = {
                 "elements": [
                     {
                         "title": "The victims of the Manchester bombing\u00a0",
-                        "image_url": "https://i.imgur.com/JsyU8QL.jpg",
+                        "image_url": "https://i.imgur.com/JsyU8QLb.jpg",
                         "default_action": {
                             "type": "web_url",
                             "url": "https://imgur.com/a/LxPX6",
@@ -3323,7 +3323,7 @@ facebook_data_example = {
                             "fallback_url": "https://imgur.com/a/LxPX6"}},
                     {
                         "title": "45 Short Clean Jokes So Bad You May Just Laugh.",
-                        "image_url": "https://i.imgur.com/FTq9q7O.jpg",
+                        "image_url": "https://i.imgur.com/FTq9q7Ob.jpg",
                         "default_action": {
                             "type": "web_url",
                             "url": "https://imgur.com/a/Y5uHp",
@@ -3332,7 +3332,7 @@ facebook_data_example = {
                             "fallback_url": "https://imgur.com/a/Y5uHp"}},
                     {
                         "title": "Perfect Prank",
-                        "image_url": "https://i.imgur.com/A3kNx72.jpg",
+                        "image_url": "https://i.imgur.com/A3kNx72b.jpg",
                         "default_action": {
                             "type": "web_url",
                             "url": "https://imgur.com/a/m3w0F",
@@ -3341,7 +3341,7 @@ facebook_data_example = {
                             "fallback_url": "https://imgur.com/a/m3w0F"}},
                     {
                         "title": "As someone with an extremely sensitive stomach, this is huge.",
-                        "image_url": "https://i.imgur.com/Mfdh5HR.jpg",
+                        "image_url": "https://i.imgur.com/Mfdh5HRb.jpg",
                         "default_action": {
                             "type": "web_url",
                             "url": "https://imgur.com/a/MwLdV",
@@ -3350,7 +3350,7 @@ facebook_data_example = {
                             "fallback_url": "https://imgur.com/a/MwLdV"}},
                     {
                         "title": "I swear",
-                        "image_url": "https://i.imgur.com/ICi9S1O.jpg",
+                        "image_url": "https://i.imgur.com/ICi9S1Ob.jpg",
                         "default_action": {
                             "type": "web_url",
                             "url": "https://imgur.com/a/tOCUu",
@@ -3359,7 +3359,7 @@ facebook_data_example = {
                             "fallback_url": "https://imgur.com/a/tOCUu"}},
                     {
                         "title": "Amazing",
-                        "image_url": "https://i.imgur.com/ops1Hyc.jpg",
+                        "image_url": "https://i.imgur.com/ops1Hycb.jpg",
                         "default_action": {
                             "type": "web_url",
                             "url": "https://imgur.com/a/pHw66",
@@ -3368,7 +3368,7 @@ facebook_data_example = {
                             "fallback_url": "https://imgur.com/a/pHw66"}},
                     {
                         "title": "Satisfaction",
-                        "image_url": "https://i.imgur.com/mELJ2QF.jpg",
+                        "image_url": "https://i.imgur.com/mELJ2QFb.jpg",
                         "default_action": {
                             "type": "web_url",
                             "url": "https://imgur.com/a/aI6Tr",
@@ -3377,7 +3377,7 @@ facebook_data_example = {
                             "fallback_url": "https://imgur.com/a/aI6Tr"}},
                     {
                         "title": "Career suicide.",
-                        "image_url": "https://i.imgur.com/3A3ZTsD.jpg",
+                        "image_url": "https://i.imgur.com/3A3ZTsDb.jpg",
                         "default_action": {
                             "type": "web_url",
                             "url": "https://imgur.com/a/Qohv8",
@@ -3386,7 +3386,7 @@ facebook_data_example = {
                             "fallback_url": "https://imgur.com/a/Qohv8"}},
                     {
                         "title": "Why the Female Cashier is Being Nice to You",
-                        "image_url": "https://i.imgur.com/36wL36M.jpg",
+                        "image_url": "https://i.imgur.com/36wL36Mb.jpg",
                         "default_action": {
                             "type": "web_url",
                             "url": "https://imgur.com/a/gJeMH",
@@ -3395,7 +3395,7 @@ facebook_data_example = {
                             "fallback_url": "https://imgur.com/a/gJeMH"}},
                     {
                         "title": "That time when RDJ was the judge of an Iron Man contest. Guess who won?",
-                        "image_url": "https://i.imgur.com/5kJpy3L.jpg",
+                        "image_url": "https://i.imgur.com/5kJpy3Lb.jpg",
                         "default_action": {
                             "type": "web_url",
                             "url": "https://imgur.com/a/QSIzk",

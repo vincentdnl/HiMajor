@@ -9,8 +9,10 @@ async def get_hot_viral_content(client_session, client_id):
             "Authorization": f"Client-ID {client_id}"
         })
 
+    response_json = await response.json()
+    log_response("IMGUR GET", response.status, response_json)
     assert response.status == 200
-    return await response.json()
+    return response_json
 
 
 async def send_response_to_user(client_session, fb_response, page_access_token):
@@ -19,4 +21,17 @@ async def send_response_to_user(client_session, fb_response, page_access_token):
         headers={'Content-Type': 'application/json'},
         data=json.dumps(fb_response)
     )
-    return await response.json()
+
+    response_json = await response.json()
+    log_response("MESSENGER POST", response.status, response_json)
+    return response_json
+
+
+def log_response(name, status, response_json):
+    try:
+        response_string = json.dumps(response_json)
+        response_string = response_string if len(response_string) < 200 else response_string[:200] + "..."
+        settings.logger.info(f"[{name}][{status}] {response_string}")
+    except TypeError as e:
+        settings.logger.info(f"[{name}] {e}")
+
