@@ -1,8 +1,9 @@
-import pytest
 import aiohttp.web
+import pytest
+import mock
 import app
-from config import config
-from mock import mock_open, patch
+import config
+
 
 PAGE_ACCESS_TOKEN = "page_access_token_test"
 VERIFY_TOKEN = "verify_token_test"
@@ -19,9 +20,9 @@ imgur:
   client-id: {CLIENT_ID}
     """
 
-    with patch("builtins.open", mock_open(read_data=fake_yml_config)):
+    with mock.patch("builtins.open", mock.mock_open(read_data=fake_yml_config)):
         test_app = app.make_app(
             aiohttp.web.Application(loop=loop),
-            config()
+            config.config()
         )
         return loop.run_until_complete(test_client(test_app))

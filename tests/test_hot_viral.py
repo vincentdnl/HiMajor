@@ -4,6 +4,7 @@ import aiohttp.client
 import settings
 import conftest
 import tests.data
+import tests.utils
 import asynctest
 import json
 
@@ -26,28 +27,7 @@ async def test_hot_viral(cli: aiohttp.test_utils.TestClient):
     aiohttp.client.ClientSession.post: unittest.mock.Mock() = mocked_post
     aiohttp.client.ClientSession.get: unittest.mock.Mock() = mocked_get
 
-    payload = {
-        "object": "page",
-        "entry": [
-            {
-                "id": "123456789101112",
-                "time": 1458692752478,
-                "messaging": [
-                    {
-                        "sender": {
-                            "id": "1234567891011121"
-                        },
-                        "recipient": {
-                            "id": "123456789101112"
-                        },
-                        "postback": {
-                            "payload": "HOT_VIRAL"
-                        }
-                    }
-                ]
-            }
-        ]
-    }
+    payload = await tests.utils.make_postback("HOT_VIRAL")
     response = await cli.post('/', json=payload)
 
     imgur_call = unittest.mock.call(
