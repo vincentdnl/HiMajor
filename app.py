@@ -4,7 +4,7 @@ import aiohttp.web
 import aiohttp.web_request
 import actions
 import config
-import webhook_handler
+import messenger_receive_api
 
 
 def make_app(aiohttp_app: aiohttp.web.Application, config_dict: dict) -> aiohttp.web.Application:
@@ -19,7 +19,7 @@ def make_app(aiohttp_app: aiohttp.web.Application, config_dict: dict) -> aiohttp
             return aiohttp.web.Response(text='')
 
     async def dispatcher(request: aiohttp.web_request.Request):
-        page_id, user_id, user_entry = await webhook_handler.extract_data_from_request(request)
+        page_id, user_id, user_entry = await messenger_receive_api.extract_data_from_request(request)
         client_session = aiohttp.ClientSession(loop=aiohttp_app.loop)
         actions_mapping_dict = {
             "GET_STARTED_PAYLOAD": lambda: actions.welcome(user_id, client_session, config_dict),
