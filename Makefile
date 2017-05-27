@@ -4,6 +4,9 @@ run:
 menu:
 	venv/bin/python make_menu.py
 
+whitelist:
+	venv/bin/python make_whitelist.py
+
 create_virtualenv:
 	rm -rf venv
 	virtualenv -p python3.6 venv
