@@ -71,9 +71,6 @@ async def test_hot_viral(cli: aiohttp.test_utils.TestClient):
         data=json.dumps(facebook_data_example)
     )
 
-    print([facebook_call])
-    print(mocked_post.call_args_list)
-
     mocked_post.assert_has_calls(
         [facebook_call],
         any_order=True
