@@ -20,8 +20,9 @@ def make_app(aiohttp_app: aiohttp.web.Application, config_dict: dict) -> aiohttp
             return aiohttp.web.Response(text='')
 
     async def hot_viral(request: aiohttp.web_request.Request):
+        client_session = aiohttp.ClientSession(loop=aiohttp_app.loop)
         json_response: dict = await get_hot_viral_content(
-            aiohttp_app.loop,
+            client_session,
             config_dict["imgur"]["client-id"]
         )
         elements = await extract_elements_from_response(json_response)
@@ -29,17 +30,17 @@ def make_app(aiohttp_app: aiohttp.web.Application, config_dict: dict) -> aiohttp
             return aiohttp.web.Response(text='')
         page_id, user_id, user_text = await extract_data_from_request(request)
         fb_response = await get_generic_template(user_id, elements)
-        await send_response_to_user(aiohttp_app.loop, page_id, user_id, fb_response)
+        await send_response_to_user(client_session, page_id, user_id, fb_response)
+        await client_session.close()
         return aiohttp.web.Response(text='')
 
-    async def send_response_to_user(loop, page_id, user_id, fb_response):
-        async with aiohttp.ClientSession(loop=loop) as client_session:
-            response = await client_session.post(
-                settings.get_me_message_url(config_dict["facebook-messenger"]["page-access-token"]),
-                headers={'Content-Type': 'application/json'},
-                data=json.dumps(fb_response)
-            )
-            return await response.json()
+    async def send_response_to_user(client_session, page_id, user_id, fb_response):
+        response = await client_session.post(
+            settings.get_me_message_url(config_dict["facebook-messenger"]["page-access-token"]),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps(fb_response)
+        )
+        return await response.json()
 
     def add_routes(the_app):
         the_app.router.add_get('/', hub)
@@ -52,7 +53,6 @@ def make_app(aiohttp_app: aiohttp.web.Application, config_dict: dict) -> aiohttp
 async def extract_elements_from_response(response_json):
     data = response_json.get("data")
     if not data or len(data) == 0:
-        print("RETURN")
         return
     extracted_elements = [
         (entry.get("title"), f"https://i.imgur.com/{entry.get('cover')}.jpg", entry.get("link")) for entry in data
@@ -60,17 +60,16 @@ async def extract_elements_from_response(response_json):
     return extracted_elements
 
 
-async def get_hot_viral_content(loop, client_id):
+async def get_hot_viral_content(client_session, client_id):
     api_url = "https://api.imgur.com/3/gallery/hot/viral/0.json"
-    async with aiohttp.ClientSession(loop=loop) as client_session:
-        async with client_session.get(
-            api_url,
-            headers={
-                "Authorization": f"Client-ID {client_id}"
-            }
-        ) as response:
-            assert response.status == 200
-            return await response.json()
+    response = await client_session.get(
+        api_url,
+        headers={
+            "Authorization": f"Client-ID {client_id}"
+        })
+
+    assert response.status == 200
+    return await response.json()
 
 
 async def get_generic_template(user_id, elements):
@@ -92,7 +91,7 @@ async def get_generic_template(user_id, elements):
 
 def get_generic_template_element(title, thumbnail_url, image_url):
     title = title[:80] if len(title) > 80 else title
-    image_url = image_url.replace("http", "https")
+    image_url = image_url.replace("http://", "https://")
     return {
         "title": title,
         "image_url": thumbnail_url,

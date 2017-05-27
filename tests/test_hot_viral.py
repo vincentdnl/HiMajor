@@ -5,6 +5,8 @@ import settings
 import conftest
 from tests.data import imgur_api_response_example
 from tests.data import facebook_data_example
+import asynctest
+import json
 
 
 def mocked_get_requests(*args, **kwargs):
@@ -12,16 +14,15 @@ def mocked_get_requests(*args, **kwargs):
         def __init__(self, status_code):
             self.status = status_code
 
-        @staticmethod
-        async def json():
+        async def json(self):
             return imgur_api_response_example
 
     return MockResponse(200)
 
 
 async def test_hot_viral(cli: aiohttp.test_utils.TestClient):
-    mocked_post = aiohttp.test_utils.make_mocked_coro()
-    mocked_get = aiohttp.test_utils.make_mocked_coro(mocked_get_requests())
+    mocked_post = asynctest.CoroutineMock()
+    mocked_get = asynctest.CoroutineMock(side_effect=mocked_get_requests)
     aiohttp.client.ClientSession.post: unittest.mock.Mock() = mocked_post
     aiohttp.client.ClientSession.get: unittest.mock.Mock() = mocked_get
 
@@ -67,8 +68,12 @@ async def test_hot_viral(cli: aiohttp.test_utils.TestClient):
     facebook_call = unittest.mock.call(
         settings.get_me_message_url(conftest.PAGE_ACCESS_TOKEN),
         headers={'Content-Type': 'application/json'},
-        data=facebook_data_example
+        data=json.dumps(facebook_data_example)
     )
+
+    print([facebook_call])
+    print(mocked_post.call_args_list)
+
     mocked_post.assert_has_calls(
         [facebook_call],
         any_order=True
