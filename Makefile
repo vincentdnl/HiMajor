@@ -21,7 +21,7 @@ virtualenv: create_virtualenv
 requirements:
 	venv/bin/pip freeze > requirements.txt
 
-tests:
+test:
 	venv/bin/pytest --ignore venv
 
 .PHONY: config

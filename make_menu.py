@@ -3,6 +3,7 @@ import aiohttp
 import settings
 import config
 import json
+import actions
 
 
 async def make_menu(loop):
@@ -26,6 +27,12 @@ async def get_payload_dict():
         "get_started": {
             "payload": "GET_STARTED_PAYLOAD"
         },
+        "greeting": [
+            {
+                "locale": "default",
+                "text": actions.welcome_message
+            }
+        ],
         "persistent_menu": [
             {
                 "locale": "default",
