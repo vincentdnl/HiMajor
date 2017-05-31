@@ -5,6 +5,8 @@ import aiohttp.web_request
 import actions
 import config
 import messenger_receive_api
+import aiohttp_jinja2
+import jinja2
 
 
 def make_app(aiohttp_app: aiohttp.web.Application, config_dict: dict) -> aiohttp.web.Application:
@@ -17,6 +19,10 @@ def make_app(aiohttp_app: aiohttp.web.Application, config_dict: dict) -> aiohttp
             return aiohttp.web.Response(text=hub_challenge)
         else:
             return aiohttp.web.Response(text='')
+
+    async def privacy_policy(request: aiohttp.web_request.Request):
+        response = aiohttp_jinja2.render_template('privacy_policy.html', request, {})
+        return response
 
     async def dispatcher(request: aiohttp.web_request.Request):
         page_id, user_id, user_entry = await messenger_receive_api.extract_data_from_request(request)
@@ -35,6 +41,7 @@ def make_app(aiohttp_app: aiohttp.web.Application, config_dict: dict) -> aiohttp
 
     def add_routes(the_app):
         the_app.router.add_get('/', hub)
+        the_app.router.add_get('/privacy_policy', privacy_policy)
         the_app.router.add_post('/', dispatcher)
 
     add_routes(aiohttp_app)
@@ -48,3 +55,4 @@ app = make_app(
     aiohttp.web.Application(loop=asyncio.get_event_loop()),
     config.config()
 )
+aiohttp_jinja2.setup(app, loader=jinja2.FileSystemLoader('templates'))
