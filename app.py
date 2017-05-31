@@ -41,7 +41,7 @@ def make_app(aiohttp_app: aiohttp.web.Application, config_dict: dict) -> aiohttp
 
     def add_routes(the_app):
         the_app.router.add_get('/', hub)
-        the_app.router.add_get('/privacy_policy', privacy_policy)
+        the_app.router.add_get('/privacy-policy', privacy_policy)
         the_app.router.add_post('/', dispatcher)
 
     add_routes(aiohttp_app)
