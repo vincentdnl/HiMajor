@@ -7,6 +7,8 @@ menu:
 whitelist:
 	venv/bin/python make_whitelist.py
 
+install: virtualenv
+
 create_virtualenv:
 	rm -rf venv
 	virtualenv -p python3.6 venv
